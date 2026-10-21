@@ -1,0 +1,4 @@
+docker build -t frontend -f Dockerfile.frontend ..
+docker build -t backend -f Dockerfile.backend ..
+docker run -d -p 8080:8080 -e REQUEST_ORIGIN=http://localhost:5001 backend
+docker run -p 5001:5001 frontend
