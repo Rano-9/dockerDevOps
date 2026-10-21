@@ -6,5 +6,6 @@ COPY . /usr/src/myapp
 WORKDIR /usr/src/myapp
 EXPOSE 5001
 RUN npm install
+RUN npm run build
 RUN npm install -g serve
 CMD ["serve", "-s", "-l", "5001", "build"]
