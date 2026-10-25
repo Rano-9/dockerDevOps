@@ -1,0 +1,14 @@
+services:
+  backend:
+    build:
+      context: ..
+      dockerfile: 2_03-10/Dockerfile.backend
+    ports:
+      - 8080:8080
+  frontend:
+    build:
+      context: ..
+      dockerfile: 2_03-10/Dockerfile.frontend
+    ports:
+      - 5001:5001
+
