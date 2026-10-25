@@ -25,9 +25,6 @@ jobs:
           - test_1_13_backend_ping.sh
           - test_1_14_frontend_backend_integration.sh
           - test_1_15_or_1_16.sh
-    defaults:
-      run:
-        working-directory: 01/tests/
     steps:
       - uses: actions/checkout@v5
 
@@ -38,5 +35,5 @@ jobs:
           node-version: "24"
 
       - name: Run ${{ matrix.script }}
-        working-directory: tests
+        working-directory: 01/tests
         run: bash ${{ matrix.script }}
