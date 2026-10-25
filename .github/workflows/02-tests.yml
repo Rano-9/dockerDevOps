@@ -7,8 +7,10 @@ on:
     - ".github/workflows/02-tests.yml"
   workflow_dispatch:
 
+
 jobs:
   test:
+
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -34,4 +36,4 @@ jobs:
 
       - name: Run ${{ matrix.script }}
         working-directory: 02/tests
-        run: bash tests/${{ matrix.script }}
+        run: bash ${{ matrix.script }}
