@@ -22,6 +22,9 @@ jobs:
           - test_1_13_backend_ping.sh
           - test_1_14_frontend_backend_integration.sh
           - test_1_15_or_1_16.sh
+    defaults:
+      run:
+        working-directory: 02/tests
     steps:
       - uses: actions/checkout@v5
 
