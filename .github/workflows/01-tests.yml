@@ -2,6 +2,9 @@ name: tests
 
 on:
   push:
+    paths:
+      - "01/**"
+      - ".github/workflows/01-tests.yml"
   pull_request:
   workflow_dispatch:
 
@@ -24,7 +27,7 @@ jobs:
           - test_1_15_or_1_16.sh
     defaults:
       run:
-        working-directory: 02/tests
+        working-directory: 01/tests/
     steps:
       - uses: actions/checkout@v5
 
