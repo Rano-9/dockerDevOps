@@ -28,3 +28,12 @@ services:
     container_name: postgres_db 
     volumes:
       - ./database:/var/lib/postgresql
+  
+  nginx:
+    image: nginx
+    ports:
+      - 8000:80
+    volumes:
+      - type: bind
+        source: ./nginx.conf
+        target: /etc/nginx/nginx.conf
