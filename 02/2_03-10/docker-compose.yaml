@@ -27,7 +27,4 @@ services:
       - POSTGRES_PASSWORD=postgres
     container_name: postgres_db 
     volumes:
-      - database:/var/lib/postgresql
-
-volumes:
-  database:
+      - ./database:/var/lib/postgresql
