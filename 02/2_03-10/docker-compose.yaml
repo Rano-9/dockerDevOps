@@ -10,7 +10,7 @@ services:
       - REDIS_HOST=redis
       - POSTGRES_HOST=db
       - POSTGRES_PASSWORD=postgres
-      - REQUEST_ORIGIN=http://localhost:5001
+      - REQUEST_ORIGIN=http://localhost:8000
   frontend:
     build:
       context: ..
