@@ -1,4 +1,4 @@
-name: tests
+name: 01_tests
 
 on:
   push:
