@@ -5,6 +5,8 @@ services:
       dockerfile: 2_03-10/Dockerfile.backend
     ports:
       - 8080:8080
+    environment:
+      - REDIS_HOST=redis
   frontend:
     build:
       context: ..
@@ -12,3 +14,7 @@ services:
     ports:
       - 5001:5001
 
+  redis:
+    image: redis:latest
+    expose:
+      - 6379
