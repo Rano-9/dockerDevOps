@@ -4,11 +4,13 @@ services:
       context: ..
       dockerfile: 2_03-10/Dockerfile.backend
     ports:
-      - 8080:8080
+      - 8080:8000
     environment:
+      - PORT=8000
       - REDIS_HOST=redis
       - POSTGRES_HOST=db
       - POSTGRES_PASSWORD=postgres
+      - REQUEST_ORIGIN=http://localhost:5001
   frontend:
     build:
       context: ..
@@ -37,3 +39,6 @@ services:
       - type: bind
         source: ./nginx.conf
         target: /etc/nginx/nginx.conf
+    depends_on:
+      - frontend
+      - backend
