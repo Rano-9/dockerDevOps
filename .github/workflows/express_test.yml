@@ -28,4 +28,4 @@ jobs:
       with:
         context: ./03/express-app
         push: true
-        tags: ${{ secrets.DOCKER_USERNAME }}/DevOps-express:latest
+        tags: ${{ secrets.DOCKER_USERNAME }}/devops-express:latest
