@@ -1,11 +1,11 @@
 services:
   express-app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: r4n0/devops-express:latest
     ports:
       - 8080:8080
   watchtower:
     image: nickfedor/watchtower:latest
+    environment:
+      -  WATCHTOWER_POLL_INTERVAL=60
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
