@@ -25,6 +25,7 @@ jobs:
 
     - name: Build and push Docker image
       uses: docker/build-push-action@v6
+      working-directory: 03/express-app
       with:
         context: .
         push: true
