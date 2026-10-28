@@ -37,5 +37,4 @@ jobs:
           node-version: 22
 
       - name: Run ${{ matrix.test_script }}
-        working-directory: 03/tests 
         run: bash "${{ matrix.test_script }}"
