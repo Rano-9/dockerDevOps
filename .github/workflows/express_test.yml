@@ -3,7 +3,7 @@ name: Release Node.js app
 on:
   push:
     paths:
-      - "03/**"
+      - "03/epxress-app"
       - ".github/workflows/express_test.yml"
   workflow_dispatch:
 
