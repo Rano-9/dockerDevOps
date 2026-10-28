@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 # script generated using copilot
 
 set -eu
