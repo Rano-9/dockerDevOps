@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y curl && \
     npm install && \
     npm run build && \
     npm install -g serve && \
-    rm -rf src/
+    rm -rf src/ 
 
 EXPOSE 5001
 
