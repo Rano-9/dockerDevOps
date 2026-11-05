@@ -17,10 +17,10 @@ ENV PATH=/home/frontend/.npm-global/bin:$PATH
 WORKDIR /frontend
 
 RUN addgroup -g 10001 -S frontend && adduser -u 10001 -S -G frontend frontend
-COPY --from=builder --chown=frontend:frontend /usr/src/myapp/build /frontend/
-RUN npm install -g serve
+COPY --from=builder --chown=frontend:frontend /usr/src/myapp/build /frontend/build
 
 USER frontend
+RUN npm install -g serve
 
 EXPOSE 5001
 CMD ["serve", "-s", "-l", "5001", "build"]
