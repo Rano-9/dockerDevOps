@@ -12,6 +12,8 @@ RUN addgroup -g 10001 -S backend && adduser -u 10001 -S -G backend backend
 WORKDIR /app
 COPY --chown=backend:backend --from=builder /usr/src/myapp/server /app
 
+ENV REQUEST_ORIGIN=http://localhost:5001
+
 USER backend
 
 EXPOSE 8080

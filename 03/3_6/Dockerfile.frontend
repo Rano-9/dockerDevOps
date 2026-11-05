@@ -1,0 +1,21 @@
+FROM ubuntu
+
+ENV REACT_APP_BACKEND_URL=http://localhost:8000/
+
+WORKDIR /usr/src/myapp
+COPY --chown=frontend:frontend code/example-frontend ./
+RUN apt-get update && apt-get install -y curl && \
+    curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
+    apt-get install -y nodejs && \
+    useradd -m -u 10001 -s /usr/sbin/nologin frontend && \
+    npm install && \
+    npm run build && \
+    npm install -g serve
+
+EXPOSE 5001
+
+USER frontend
+ENV NPM_CONFIG_PREFIX=/home/frontend/.npm-global
+ENV PATH=/home/frontend/.npm-global/bin:$PATH
+
+CMD ["serve", "-s", "-l", "5001", "build"]
