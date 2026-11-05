@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y curl && \
 WORKDIR /usr/src/myapp
 COPY --chown=frontend:frontend code/example-frontend ./
 
-ENV REACT_APP_BACKEND_URL=http://localhost:8000/
+ENV REACT_APP_BACKEND_URL=http://localhost:8080/
 
 RUN npm install
 RUN npm run build

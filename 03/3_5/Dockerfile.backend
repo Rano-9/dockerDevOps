@@ -1,5 +1,6 @@
 FROM golang:1.16-alpine AS builder
 
+ENV REQUEST_ORIGIN=http://localhost:5001
 WORKDIR /usr/src/myapp
 
 COPY code/example-backend ./

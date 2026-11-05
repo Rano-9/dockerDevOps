@@ -1,15 +1,18 @@
 FROM golang:1.16-alpine AS builder
-
+ENV REQUEST_ORIGIN=http://localhost:5001
 WORKDIR /usr/src/myapp
 
 COPY code/example-backend ./
 RUN go build -o server .
 
 FROM alpine:latest
-RUN apk update && apk add ca-certificates && rm -rf /var/cache/apk/*
 
-RUN addgroup -g 10001 -S backend && adduser -u 10001 -S -G backend backend
-WORKDIR /app
+ENV REQUEST_ORIGIN=http://localhost:5001
+
+RUN apk update && apk add ca-certificates && rm -rf /var/cache/apk/* && \
+ addgroup -g 10001 -S backend && adduser -u 10001 -S -G backend backend
+
+ WORKDIR /app
 COPY --chown=backend:backend --from=builder /usr/src/myapp/server /app
 
 USER backend

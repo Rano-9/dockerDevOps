@@ -1,16 +1,19 @@
 FROM ubuntu
 
-ENV REACT_APP_BACKEND_URL=http://localhost:8000/
+ENV REACT_APP_BACKEND_URL=http://localhost:8080/
 
 WORKDIR /usr/src/myapp
 COPY --chown=frontend:frontend code/example-frontend ./
 RUN apt-get update && apt-get install -y curl && \
     curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
     apt-get install -y nodejs && \
+    apt-get purge -y  --auto-remove curl && \
+    rm -rf /var/lib/apt/lists/* &&\
     useradd -m -u 10001 -s /usr/sbin/nologin frontend && \
     npm install && \
     npm run build && \
-    npm install -g serve
+    npm install -g serve && \
+    rm -rf src/
 
 EXPOSE 5001
 
