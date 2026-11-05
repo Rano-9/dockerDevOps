@@ -16,6 +16,9 @@ BACKEND_DOCKERFILE="$TARGET_DIR/Dockerfile.backend"
 FRONTEND_DOCKERFILE="$TARGET_DIR/Dockerfile.frontend"
 PLAYWRIGHT_DIR="$REPO_ROOT/tests/playwright"
 
+FRONTEND_WORKDIR=$(awk '/^[[:space:]]*WORKDIR/{print $2}' "$FRONTEND_DOCKERFILE" | tail -n 1)
+BACKEND_WORKDIR=$(awk '/^[[:space:]]*WORKDIR/{print $2}' "$BACKEND_DOCKERFILE" | tail -n 1)
+
 BACKEND_IMAGE="dod-3-6-backend:test"
 FRONTEND_IMAGE="dod-3-6-frontend:test"
 BACKEND_CONTAINER="dod-3-6-backend-test"
@@ -89,11 +92,11 @@ pass "frontend image builds"
 # The hints call out specific folders that should no longer be in the final
 # image: the frontend's src folder (only the built static files are served)
 # and the backend's cache folder.
-docker run --rm "$FRONTEND_IMAGE" test -d /myapp/src >/dev/null 2>&1 \
+docker run --rm "$FRONTEND_IMAGE" test -d "$FRONTEND_WORKDIR"/src >/dev/null 2>&1 \
   && fail "frontend image still contains the src folder -- only the build output is needed at runtime"
 pass "frontend image no longer contains the src folder"
 
-docker run --rm "$BACKEND_IMAGE" test -d /myproject/cache >/dev/null 2>&1 \
+docker run --rm "$BACKEND_IMAGE" test -d "$BACKEND_WORKDIR"/cache >/dev/null 2>&1 \
   && fail "backend image still contains the cache folder -- it is not needed at runtime"
 pass "backend image no longer contains the cache folder"
 
