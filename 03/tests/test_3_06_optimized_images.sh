@@ -113,7 +113,7 @@ pass "backend and frontend containers started"
 wait_for_http() {
   local url="$1"
   for _ in $(seq 1 30); do
-    curl -s --max-time 2 "$url" >/dev/null 2>&1 && return 0
+    curl -s --max-time --fail 2 "$url" >/dev/null 2>&1 && return 0
     sleep 2
   done
   return 1
