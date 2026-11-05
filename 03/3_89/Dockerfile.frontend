@@ -1,0 +1,26 @@
+FROM node:16-alpine AS builder
+
+ENV REACT_APP_BACKEND_URL=http://localhost:8080/
+WORKDIR /usr/src/myapp
+COPY code/example-frontend ./
+
+RUN npm install && \
+    npm install -g serve && \
+    npm run build && \
+    rm -rf src/ 
+
+
+FROM node:16-alpine
+
+ENV NPM_CONFIG_PREFIX=/home/frontend/.npm-global
+ENV PATH=/home/frontend/.npm-global/bin:$PATH
+WORKDIR /frontend
+
+RUN addgroup -g 10001 -S frontend && adduser -u 10001 -S -G frontend frontend
+COPY --from=builder --chown=frontend:frontend /usr/src/myapp/build /frontend/
+RUN npm install -g serve
+
+USER frontend
+
+EXPOSE 5001
+CMD ["serve", "-s", "-l", "5001", "build"]

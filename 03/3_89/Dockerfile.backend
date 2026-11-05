@@ -1,0 +1,18 @@
+FROM golang:1.16-alpine AS builder
+ENV REQUEST_ORIGIN=http://localhost:5001
+ENV CGO_ENABLED=0
+
+WORKDIR /usr/src/myapp
+
+COPY code/example-backend ./
+RUN go build -o server .
+
+FROM scratch
+
+ENV REQUEST_ORIGIN=http://localhost:5001
+
+WORKDIR /app
+COPY --from=builder /usr/src/myapp/server /app
+
+EXPOSE 8080
+CMD [ "./server" ]
