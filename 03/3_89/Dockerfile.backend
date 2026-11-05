@@ -13,4 +13,6 @@ ENV REQUEST_ORIGIN=http://localhost:5001
 
 WORKDIR /app
 COPY --from=builder /usr/src/myapp/server /app
+
+EXPOSE 8080
 CMD [ "./server" ]

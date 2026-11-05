@@ -140,7 +140,7 @@ check_running_as_non_root "$FRONTEND_CONTAINER" "frontend"
 command -v node >/dev/null 2>&1 || fail "node is required to run the browser check in tests/playwright"
 (cd "$PLAYWRIGHT_DIR" && npm install --no-audit --no-fund >/dev/null 2>&1) \
   || fail "npm install failed in tests/playwright"
-(cd "$PLAYWRIGHT_DIR" && npx --yes playwright install chromium >/dev/null 2>&1) \
+(cd "$PLAYWRIGHT_DIR" && npx --yes playwright install --with-deps chromium >/dev/null 2>&1) \
   || fail "playwright chromium install failed"
 
 node "$PLAYWRIGHT_DIR/check-exercise-button.mjs" "http://localhost:$FRONTEND_PORT" backend \
